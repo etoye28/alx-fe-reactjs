@@ -13,13 +13,13 @@ function App() {
 
   return (
     <>
-    
+     {/* Task 1: WelcomeMessage */}
     <WelcomeMessage />
-    <div>
+    {/* Task 2: Required Components */}
       <Header />
       <MainContent />
       <Footer />
-    </div>
+       {/* Vite default demo content (you can remove later if not needed) */}
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
