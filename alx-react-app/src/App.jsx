@@ -6,6 +6,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import UserProfile from './components/UserProfile';
 
 
 function App() {
@@ -19,6 +20,11 @@ function App() {
       <Header />
       <MainContent />
       <Footer />
+        <UserProfile 
+         name="Alice" 
+         age="25" 
+         bio="Loves hiking and photography" 
+        />
        {/* Vite default demo content (you can remove later if not needed) */}
       <div>
         <a href="https://vite.dev" target="_blank">
@@ -43,5 +49,4 @@ function App() {
     </>
   )
 }
-
 export default App
