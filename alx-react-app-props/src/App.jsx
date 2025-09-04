@@ -7,7 +7,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import UserProfile from './components/UserProfile';
-import ProfilePage from "./ProfilePage";
+import ProfilePage from "./components/ProfilePage";
 import UserContext from "./components/UserContext";
 
 
