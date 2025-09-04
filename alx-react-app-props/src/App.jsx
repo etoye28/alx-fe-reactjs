@@ -7,15 +7,16 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import UserProfile from './components/UserProfile';
-import UserContext from './UserContext';
-import ProfilePage from './ProfilePage';
+import ProfilePage from "./ProfilePage";
+import UserContext from "./UserContext";
+
+
 
 
 
 function App() {
   const [count, setCount] = useState(0);
-  const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
-
+  
   return (
     <>
      {/* Task 1: WelcomeMessage */}
@@ -29,9 +30,10 @@ function App() {
          age="25" 
          bio="Loves hiking and photography" 
         />
-       <UserContext.Provider value={userData}/>
-       <ProfilePage/>
-       <UserContext.Provider/>
+          <UserContext.Provider value={userData}>
+      <ProfilePage />
+    </UserContext.Provider>
+       
 
        {/* Vite default demo content (you can remove later if not needed) */}
       <div>
