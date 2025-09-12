@@ -2,7 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useRecipeStore } from './recipeStore';
 import { DeleteRecipeButton } from './DeleteRecipeButton';
 
-export const RecipeDetails = () => {
+ const RecipeDetails = () => {
   const { id } = useParams();
   const recipeId = Number(id);
   const recipe = useRecipeStore((state) =>
@@ -35,3 +35,4 @@ export const RecipeDetails = () => {
     </div>
   );
 };
+export default RecipeDetails;

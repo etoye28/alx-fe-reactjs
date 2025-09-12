@@ -5,8 +5,8 @@ import './App.css'
 
 import { AddRecipeForm } from './components/AddRecipeForm'
 import { RecipeList } from './components/RecipeList'
-import { RecipeDetails } from './components/RecipeDetails'
-import { EditRecipeForm } from './components/EditRecipeForm'
+import  RecipeDetails  from './components/RecipeDetails'
+import  EditRecipeForm  from './components/EditRecipeForm'
 
 function App() {
   const [count, setCount] = useState(0)
