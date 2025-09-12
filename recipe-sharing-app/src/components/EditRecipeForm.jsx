@@ -30,8 +30,8 @@ const EditRecipeForm = () => {
     );
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
     if (!title.trim() || !description.trim()) return;
 
     updateRecipe({ id: recipeId, title, description });
@@ -46,7 +46,7 @@ const EditRecipeForm = () => {
           type="text"
           placeholder="Recipe Title"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(event) => setTitle(event.target.value)}
           style={{ display: 'block', marginBottom: '0.5rem' }}
         />
       </div>
@@ -54,7 +54,7 @@ const EditRecipeForm = () => {
         <textarea
           placeholder="Recipe Description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(event) => setDescription(event.target.value)}
           style={{ display: 'block', marginBottom: '0.5rem' }}
         />
       </div>
