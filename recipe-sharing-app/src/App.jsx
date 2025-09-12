@@ -13,6 +13,7 @@ function App() {
 
   return (
     <>
+    <Router>
       <div style={{ padding: '2rem' }}>
         <header style={{ marginBottom: '1.5rem' }}>
           <h1>
@@ -50,6 +51,7 @@ function App() {
           Click on the Vite and React logos to learn more
         </p>
       </div>
+      </Router>
     </>
   )
 }
