@@ -1,40 +1,55 @@
+// src/App.jsx
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Routes, Route, Link } from 'react-router-dom'
 import './App.css'
-import AddRecipeForm from './components/AddRecipeForm';
-import RecipeList from './components/RecipeList';
+
+import { AddRecipeForm } from './components/AddRecipeForm'
+import { RecipeList } from './components/RecipeList'
+import { RecipeDetails } from './components/RecipeDetails'
+import { EditRecipeForm } from './components/EditRecipeForm'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-    <div style={{ padding: '2rem' }}>
-      <h1>🍲 Recipe Sharing App</h1>
-      <AddRecipeForm />
-      <RecipeList />
-    </div>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div style={{ padding: '2rem' }}>
+        <header style={{ marginBottom: '1.5rem' }}>
+          <h1>
+            <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+              🍲 Recipe Sharing App
+            </Link>
+          </h1>
+          <nav style={{ marginBottom: '1rem' }}>
+            <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
+            <Link to="/add">Add Recipe</Link>
+          </nav>
+        </header>
+
+        {/* Routing setup */}
+        <Routes>
+          <Route path="/" element={<RecipeList />} />
+          <Route path="/add" element={<AddRecipeForm />} />
+          <Route path="/recipes/:id" element={<RecipeDetails />} />
+          <Route path="/recipes/:id/edit" element={<EditRecipeForm />} />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+
+      {/* Demo Vite + React section (you can remove later) */}
+      <div>
+        <h1>Vite + React</h1>
+        <div className="card">
+          <button onClick={() => setCount((count) => count + 1)}>
+            count is {count}
+          </button>
+          <p>
+            Edit <code>src/App.jsx</code> and save to test HMR
+          </p>
+        </div>
+        <p className="read-the-docs">
+          Click on the Vite and React logos to learn more
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
