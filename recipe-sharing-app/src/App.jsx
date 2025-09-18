@@ -1,5 +1,5 @@
 // src/App.jsx
-
+/*
 import { useState } from 'react'
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom'
 import './App.css'
@@ -12,7 +12,7 @@ import SearchBar from './components/SearchBar'
 import FavoritesList from './components/FavoritesList';
 import RecommendationsList from './components/RecommendationsList';
 
-/*
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -101,7 +101,7 @@ function App() {
 
         {/* Search Bar */}
         <SearchBar />
-
+        
         {/* Routing setup */}
         <Routes>
           <Route path="/" element={<RecipeList />} />
