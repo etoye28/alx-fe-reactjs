@@ -9,6 +9,8 @@ function App() {
   return (
     <>
       <div>
+        <h1>GitHub User Search App</h1>
+        <p>Setup successful! 🚀</p>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
