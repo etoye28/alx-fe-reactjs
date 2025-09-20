@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { fetchAdvancedUsers } from "../services/githubService";
+import { fetchUserData } from "../services/githubService";
 
 export default function Search() {
   const [username, setUsername] = useState("");
@@ -16,7 +16,7 @@ export default function Search() {
     setResults([]);
 
     try {
-      const data = await fetchAdvancedUsers(username, location, minRepos);
+      const data = await fetchUserData(username, location, minRepos);
       setResults(data.items); // GitHub search API returns { items: [...] }
     } catch (err) {
       setError("Looks like we cant find the user");
