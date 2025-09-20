@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { fetchUserData } from "../services/githubService";
+import { fetchAdvancedUsers } from "../services/githubService";
 
 export default function Search() {
   const [username, setUsername] = useState("");
   const [location, setLocation] = useState("");
   const [minRepos, setMinRepos] = useState("");
   const [results, setResults] = useState([]);
-  
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -15,11 +14,10 @@ export default function Search() {
     setLoading(true);
     setError("");
     setResults([]);
-    
 
     try {
       const data = await fetchAdvancedUsers(username, location, minRepos);
-      setResults(data.items);
+      setResults(data.items); // GitHub search API returns { items: [...] }
     } catch (err) {
       setError("Looks like we cant find the user");
     } finally {
@@ -29,18 +27,42 @@ export default function Search() {
 
   return (
     <div className="max-w-xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4"
+      >
         <input
           type="text"
           placeholder="Enter GitHub username"
           value={username}
-          onChange={(e) => setUsername(e.target.value)} className="border p-2 rounded"
+          onChange={(e) => setUsername(e.target.value)}
+          className="border p-2 rounded"
         />
-        <button type="submit" className="bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Search</button>
+        <input
+          type="text"
+          placeholder="Enter location (optional)"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          className="border p-2 rounded"
+        />
+        <input
+          type="number"
+          placeholder="Minimum repos (optional)"
+          value={minRepos}
+          onChange={(e) => setMinRepos(e.target.value)}
+          className="border p-2 rounded"
+        />
+        <button
+          type="submit"
+          className="bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+        >
+          Search
+        </button>
       </form>
 
       {loading && <p className="mt-4 text-gray-600">Loading...</p>}
       {error && <p className="mt-4 text-red-500">{error}</p>}
+
       <div className="mt-6 space-y-4">
         {results.map((user) => (
           <div
