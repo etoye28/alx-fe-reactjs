@@ -16,3 +16,4 @@ export async function fetchUserData(username, location, minRepos) {
 
   return response.data; // contains items: []
 }
+
