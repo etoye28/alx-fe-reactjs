@@ -3,34 +3,41 @@ import React, { useState } from "react";
 const AddRecipeForm = () => {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
-  const [steps, setSteps] = useState(""); // <- renamed from instructions
+  const [steps, setSteps] = useState("");
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Simple validation
+  // ✅ Add validate function
+  const validate = () => {
     const newErrors = {};
     if (!title.trim()) newErrors.title = "Title is required";
     if (!ingredients.trim() || ingredients.split("\n").length < 2)
       newErrors.ingredients = "Please enter at least two ingredients";
     if (!steps.trim() || steps.split("\n").length < 1)
-      newErrors.steps = "Steps are required"; // <- updated
+      newErrors.steps = "Steps are required";
 
-    setErrors(newErrors);
+    return newErrors;
+  };
 
-    if (Object.keys(newErrors).length === 0) {
-      // Here you can handle form submission, e.g., add to data.json or state
-      console.log({
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const validationErrors = validate(); // call validate
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      // submission object
+      const newRecipe = {
         title,
         ingredients: ingredients.split("\n"),
-        steps: steps.split("\n"), // <- updated
-      });
+        steps: steps.split("\n"),
+      };
+
+      console.log(newRecipe);
 
       // Clear form
       setTitle("");
       setIngredients("");
-      setSteps(""); // <- updated
+      setSteps("");
       alert("Recipe submitted successfully!");
     }
   };
