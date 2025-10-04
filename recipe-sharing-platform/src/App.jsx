@@ -1,3 +1,20 @@
+import React from "react";
+import HomePage from "./components/HomePage";
+import "./App.css";
+
+function App() {
+  return (
+    <div>
+      <HomePage />
+    </div>
+  );
+}
+
+export default App;
+
+
+/*
+import HomePage from "./components/HomePage";
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
@@ -8,6 +25,7 @@ function App() {
 
   return (
     <>
+    <HomePage />
     <div className="text-center text-blue-500">
       Hello, Recipe Sharing Platform!
     </div>
@@ -35,4 +53,5 @@ function App() {
   )
 }
 
-export default App
+export default App;
+*/
