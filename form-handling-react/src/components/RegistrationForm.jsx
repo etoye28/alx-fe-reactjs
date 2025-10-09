@@ -4,20 +4,30 @@ const RegistrationForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!username || !email || !password) {
-      setError("All fields are required!");
+    if (!username) {
+      setErrors("Username is required!");
       return;
     }
 
-    setError("");
+    if (!email) {
+      setErrors("Email is required!");
+      return;
+    }
+
+    if (!password) {
+      setErrors("Password is required!");
+      return;
+    }
+
+    setErrors("");
     console.log("Form submitted:", { username, email, password });
 
-    // Simulate mock API
+    // Simulate a mock API call
     fetch("https://jsonplaceholder.typicode.com/users", {
       method: "POST",
       body: JSON.stringify({ username, email, password }),
@@ -64,7 +74,7 @@ const RegistrationForm = () => {
           />
         </div>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {errors && <p style={{ color: "red" }}>{errors}</p>}
         <button type="submit">Register</button>
       </form>
     </div>
