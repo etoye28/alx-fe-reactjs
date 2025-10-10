@@ -1,3 +1,26 @@
+// src/App.jsx
+import React from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import PostsComponent from "./components/PostsComponent";
+
+// Create a new QueryClient instance
+const queryClient = new QueryClient();
+
+function App() {
+  return (
+    // Wrap the app inside QueryClientProvider
+    <QueryClientProvider client={queryClient}>
+      <div className="App">
+        <h1>React Query Demo</h1>
+        <PostsComponent />
+      </div>
+    </QueryClientProvider>
+  );
+}
+
+export default App;
+
+/*
 import React from "react";
 import PostsComponent from "./components/PostsComponent";
 
@@ -12,7 +35,7 @@ function App() {
 
 export default App;
 
-/*
+
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
