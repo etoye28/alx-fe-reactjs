@@ -1,11 +1,14 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
+import ProfileDetails from "./ProfileDetails";
+import ProfileSettings from "./ProfileSettings";
 
 const Profile = () => {
   return (
-    <div className="profile p-6 text-center">
-      <h1 className="text-2xl font-bold">Profile</h1>
-      <p>This is the Profile component.</p>
-    </div>
+    <Routes>
+      <Route path="/" element={<ProfileDetails />} />
+      <Route path="settings" element={<ProfileSettings />} />
+    </Routes>
   );
 };
 
