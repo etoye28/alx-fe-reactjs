@@ -1,57 +1,55 @@
+// src/components/PostsComponent.jsx
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "react-query";
 
-// Fetch posts from the API
-const fetchPosts = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-  if (!res.ok) throw new Error("Network response was not ok");
-  return res.json();
-};
+function PostsComponent() {
+  // Fetch function
+  const fetchPosts = async () => {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+    if (!response.ok) {
+      throw new Error("Failed to fetch posts");
+    }
+    return response.json();
+  };
 
-const PostsComponent = () => {
+  // Use React Query with advanced options
   const {
     data: posts,
     isLoading,
     isError,
     error,
     refetch,
-    isFetching,
-  } = useQuery({
-    queryKey: ["posts"],
-    queryFn: fetchPosts,
-    staleTime: 1000 * 60 * 5, // 5 minutes
+  } = useQuery("posts", fetchPosts, {
+    cacheTime: 1000 * 60 * 5, // cache data for 5 minutes
+    refetchOnWindowFocus: false, // don't refetch automatically when tab regains focus
+    keepPreviousData: true, // keep previous data while fetching new data
   });
 
-  if (isLoading) return <p>Loading posts...</p>;
-  if (isError) return <p>Error: {error.message}</p>;
+  // Loading state
+  if (isLoading) {
+    return <p>Loading posts...</p>;
+  }
+
+  // Error state
+  if (isError) {
+    return <p>Error: {error.message}</p>;
+  }
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Posts List</h2>
-      <button
-        onClick={() => refetch()}
-        style={{
-          background: "#007bff",
-          color: "#fff",
-          border: "none",
-          padding: "8px 12px",
-          borderRadius: "4px",
-          cursor: "pointer",
-        }}
-      >
-        {isFetching ? "Refreshing..." : "Refetch Posts"}
-      </button>
-
-      <ul style={{ marginTop: "20px" }}>
-        {posts.slice(0, 10).map((post) => (
-          <li key={post.id} style={{ marginBottom: "10px" }}>
-            <strong>{post.title}</strong>
-            <p>{post.body}</p>
-          </li>
-        ))}
+    <div>
+      <h2>Posts</h2>
+      <button onClick={() => refetch()}>Refetch Posts</button>
+      <ul>
+        {posts &&
+          posts.map((post) => (
+            <li key={post.id}>
+              <strong>{post.title}</strong>
+              <p>{post.body}</p>
+            </li>
+          ))}
       </ul>
     </div>
   );
-};
+}
 
 export default PostsComponent;
