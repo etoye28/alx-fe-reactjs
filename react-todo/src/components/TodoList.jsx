@@ -5,18 +5,17 @@ const TodoList = () => {
     { id: 1, text: "Learn React", completed: false },
     { id: 2, text: "Build a Todo App", completed: true },
   ]);
-
   const [newTodo, setNewTodo] = useState("");
 
   const addTodo = (e) => {
     e.preventDefault();
-    if (!newTodo.trim()) return;
-    const newTask = {
+    if (newTodo.trim() === "") return;
+    const newItem = {
       id: Date.now(),
       text: newTodo,
       completed: false,
     };
-    setTodos([...todos, newTask]);
+    setTodos([...todos, newItem]);
     setNewTodo("");
   };
 
@@ -39,10 +38,9 @@ const TodoList = () => {
       <form onSubmit={addTodo}>
         <input
           type="text"
-          placeholder="Add a new task"
+          placeholder="Add new todo"
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
-          aria-label="New Todo Input"
         />
         <button type="submit">Add</button>
       </form>
@@ -56,10 +54,12 @@ const TodoList = () => {
               textDecoration: todo.completed ? "line-through" : "none",
               cursor: "pointer",
             }}
-            data-testid="todo-item"
           >
             {todo.text}
-            <button onClick={(e) => { e.stopPropagation(); deleteTodo(todo.id); }}>
+            <button onClick={(e) => {
+              e.stopPropagation();
+              deleteTodo(todo.id);
+            }}>
               Delete
             </button>
           </li>

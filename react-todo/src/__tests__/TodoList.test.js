@@ -11,26 +11,26 @@ describe("TodoList Component", () => {
 
   test("adds a new todo", () => {
     render(<TodoList />);
-    const input = screen.getByLabelText("New Todo Input");
-    const button = screen.getByText("Add");
+    const input = screen.getByPlaceholderText("Add new todo");
+    const addButton = screen.getByText("Add");
 
     fireEvent.change(input, { target: { value: "New Task" } });
-    fireEvent.click(button);
+    fireEvent.click(addButton);
 
     expect(screen.getByText("New Task")).toBeInTheDocument();
   });
 
-  test("toggles a todo as completed", () => {
+  test("toggles todo completion", () => {
     render(<TodoList />);
-    const todo = screen.getByText("Learn React");
-    fireEvent.click(todo);
-    expect(todo).toHaveStyle("text-decoration: line-through");
+    const todoItem = screen.getByText("Learn React");
+    fireEvent.click(todoItem);
+    expect(todoItem).toHaveStyle("text-decoration: line-through");
   });
 
   test("deletes a todo", () => {
     render(<TodoList />);
-    const deleteButtons = screen.getAllByText("Delete");
-    fireEvent.click(deleteButtons[0]);
+    const deleteButton = screen.getAllByText("Delete")[0];
+    fireEvent.click(deleteButton);
     expect(screen.queryByText("Learn React")).not.toBeInTheDocument();
   });
 });
