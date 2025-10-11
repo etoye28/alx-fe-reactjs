@@ -1,15 +1,23 @@
 import React, { useState } from "react";
-import AddTodoForm from "./AddTodoForm";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([
     { id: 1, text: "Learn React", completed: false },
-    { id: 2, text: "Build a Todo App", completed: false },
+    { id: 2, text: "Build a Todo App", completed: true },
   ]);
 
-  const addTodo = (text) => {
-    const newTodo = { id: Date.now(), text, completed: false };
-    setTodos([...todos, newTodo]);
+  const [newTodo, setNewTodo] = useState("");
+
+  const addTodo = (e) => {
+    e.preventDefault();
+    if (!newTodo.trim()) return;
+    const newTask = {
+      id: Date.now(),
+      text: newTodo,
+      completed: false,
+    };
+    setTodos([...todos, newTask]);
+    setNewTodo("");
   };
 
   const toggleTodo = (id) => {
@@ -26,8 +34,19 @@ const TodoList = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Todo List</h1>
-      <AddTodoForm addTodo={addTodo} />
+      <h1>Todo List</h1>
+
+      <form onSubmit={addTodo}>
+        <input
+          type="text"
+          placeholder="Add a new task"
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
+          aria-label="New Todo Input"
+        />
+        <button type="submit">Add</button>
+      </form>
+
       <ul>
         {todos.map((todo) => (
           <li
@@ -37,9 +56,12 @@ const TodoList = () => {
               textDecoration: todo.completed ? "line-through" : "none",
               cursor: "pointer",
             }}
+            data-testid="todo-item"
           >
-            {todo.text}{" "}
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            {todo.text}
+            <button onClick={(e) => { e.stopPropagation(); deleteTodo(todo.id); }}>
+              Delete
+            </button>
           </li>
         ))}
       </ul>
